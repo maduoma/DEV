@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+
+   <form method='post' action='' enctype="multipart/form-data">
+      <input type="file" id='files' name="files[]" multiple><br>
+      <input type="button" id="submit" value='Upload'>
+   </form>
+
+   <!-- Preview -->
+   <div id='preview'></div>
+
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script>
+      $(document).ready(function () {
+         $('#submit').click(function () {
+            var form_data = new FormData();
+
+            // Read selected files
+            var totalfiles = document.getElementById('files').files.length;
+            for (var index = 0; index < totalfiles; index++) {
+               form_data.append("files[]", document.getElementById('files').files[index]);
+               $('#preview').append("<img src='" + URL.createObjectURL(event.target.files[i]) + "'>");
+            }
+
+            // AJAX request
+            $.ajax({
+               url: 'ajaxUpload.php',
+               type: 'post',
+               data: form_data,
+               dataType: 'json',
+               contentType: false,
+               processData: false,
+               success: function (response) {
+                  alert("Uploaded SuccessFully");
+                  console.log(response);
+
+               }
+            });
+         });
+      });
+   </script>
+</body>
+
+</html>
