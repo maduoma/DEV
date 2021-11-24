@@ -4,9 +4,9 @@ require_once('includes/db.php');
 require_once('includes/functions.php');
 
 if($_SERVER["EQUEST_METHOD"] == "POST") {
-    $title = prep_data($_POST['title']);
-    $content = prep_data($_POST['content']);
-    $important = prep_data($_POST['important']);
+    $title = prep_input($_POST['title']);
+    $content = prep_input($_POST['content']);
+    $important = prep_input($_POST['important']);
     
 
    // echo $title;
