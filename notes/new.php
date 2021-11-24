@@ -1,17 +1,16 @@
-<?
+<?php
 
 require_once('includes/db.php');
 require_once('includes/functions.php');
 
-if($_SERVER["EQUEST_METHOD"] == "POST") {
+if($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = prep_input($_POST['title']);
     $content = prep_input($_POST['content']);
     $important = prep_input($_POST['important']);
     
-
-   // echo $title;
-   // echo $content;
-   // echo $important;
+   echo $title;
+   echo $content;
+   echo $important;
 
     $sql = "INSERT INTO notes (title, content, important) VALUES ('";
     $sql .= $title . "', '" . $content . "', '" . $important . "')";
@@ -20,15 +19,10 @@ if($_SERVER["EQUEST_METHOD"] == "POST") {
     if(mysqli_query($conn, $sql)) {
         echo "Succesful";
     }
-
-
 }
 
 //INSERT INTO tablename (colunms) VALUES (values)
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html>

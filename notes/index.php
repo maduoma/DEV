@@ -1,5 +1,4 @@
 <?php
-
 require_once('includes/db.php');
 $sql = "SELECT * FROM notes";
 $notes = mysqli_query($conn, $sql);
