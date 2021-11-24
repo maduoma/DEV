@@ -1,13 +1,10 @@
 <?php
 
 require_once('includes/db.php');
-
 $sql = "SELECT * FROM notes";
 $notes = mysqli_query($conn, $sql);
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -26,8 +23,6 @@ $notes = mysqli_query($conn, $sql);
                 <?php 
                 
                 while($note = mysqli_fetch_assoc($notes)) {
-
-             
                 
                 ?>
                     <div class="note">
