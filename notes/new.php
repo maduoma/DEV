@@ -1,29 +1,21 @@
-<?php
+<?php 
+    require_once('includes/db.php');
+    require_once('includes/functions.php');
 
-require_once('includes/db.php');
-require_once('includes/functions.php');
+    if ($_SERVER['REQUEST_METHOD'] == "POST"){
+        $title = prep_input($_POST['title']);
+        $content = prep_input($_POST['content']);
+        $important = prep_input($_POST['important']);
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = prep_input($_POST['title']);
-    $content = prep_input($_POST['content']);
-    $important = prep_input($_POST['important']);
-    
-   echo $title;
-   echo $content;
-   echo $important;
+        $sql = "INSERT INTO notes (title, content, important) VALUES ('";
+        $sql .= $title . "', '" . $content . "', '" . $important . "')";
 
-    $sql = "INSERT INTO notes (title, content, important) VALUES ('";
-    $sql .= $title . "', '" . $content . "', '" . $important . "')";
-    //echo $sql;
-
-    if(mysqli_query($conn, $sql)) {
-        echo "Succesful";
+        if (mysqli_query($conn, $sql)){
+            header("Location: index.php");
+        }
     }
-}
 
-//INSERT INTO tablename (colunms) VALUES (values)
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,5 +46,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             
         <input type="submit" />
 </html>
-
-<?php require_once('includes/footer.php'); ?>  
