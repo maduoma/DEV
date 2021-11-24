@@ -62,3 +62,5 @@ mysqli_free_result($result);
             
         <input type="submit" />
 </html>
+
+<?php require_once('includes/footer.php');?>
