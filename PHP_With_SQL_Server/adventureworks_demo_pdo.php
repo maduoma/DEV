@@ -13,13 +13,13 @@ PARTICULAR PURPOSE.
 <!-- data access code.-->
 <html>
 <head>
-<title>AdventureWorks Product Reviews</title>
+    <title>AdventureWorks Product Reviews</title>
 </head>
 <body>
 <h1 align='center'>AdventureWorks Product Reviews</h1>
 <h5 align='center'>This application is a demonstration of the
-                   object oriented API (PDO_SQLSRV driver) for the
-                   Microsoft Drivers for PHP for SQL Server.</h5><br/>
+    object oriented API (PDO_SQLSRV driver) for the
+    Microsoft Drivers for PHP for SQL Server.</h5><br/>
 <?php
 //BNY-L-2101\SQLEXPRESS
 //$serverName = "(local)\sqlexpress";
@@ -27,8 +27,7 @@ PARTICULAR PURPOSE.
 $serverName = "localhost\SQLEXPRESS";
 
 /* Connect using Windows Authentication. */
-try
-{
+try {
     $conn = new PDO("sqlsrv:server=$serverName ; Database=AdventureWorks", "", "");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
@@ -37,10 +36,9 @@ try
 
 if (isset($_REQUEST['action'])) {
     switch ($_REQUEST['action']) {
-/* Get AdventureWorks products by querying against the product name.*/
+        /* Get AdventureWorks products by querying against the product name.*/
         case 'getproducts':
-            try
-            {
+            try {
                 $params = array($_POST['query']);
                 $tsql = "SELECT ProductID, Name, Color, Size, ListPrice
  FROM Production.Product
@@ -65,21 +63,20 @@ if (isset($_REQUEST['action'])) {
             GetSearchTerms(!null);
             break;
 
-/* Get reviews for a specified productID. */
+        /* Get reviews for a specified productID. */
         case 'getreview':
             GetPicture($_GET['productid']);
             GetReviews($conn, $_GET['productid']);
             break;
 
-/* Write a review for a specified productID. */
+        /* Write a review for a specified productID. */
         case 'writereview':
             DisplayWriteReviewForm($_POST['productid']);
             break;
 
-/* Submit a review to the database. */
+        /* Submit a review to the database. */
         case 'submitreview':
-            try
-            {
+            try {
                 $tsql = "INSERT INTO Production.ProductReview (ProductID,
    ReviewerName,
    ReviewDate,
@@ -102,10 +99,9 @@ if (isset($_REQUEST['action'])) {
             GetReviews($conn, $_POST['productid']);
             break;
 
-/* Display form for uploading a picture.*/
+        /* Display form for uploading a picture.*/
         case 'displayuploadpictureform':
-            try
-            {
+            try {
                 $tsql = "SELECT Name FROM Production.Product WHERE ProductID = ?";
                 $getName = $conn->prepare($tsql);
                 $getName->execute(array($_GET['productid']));
@@ -116,10 +112,9 @@ if (isset($_REQUEST['action'])) {
             DisplayUploadPictureForm($_GET['productid'], $name);
             break;
 
-/* Upload a new picture for the selected product. */
+        /* Upload a new picture for the selected product. */
         case 'uploadpicture':
-            try
-            {
+            try {
                 $tsql = "INSERT INTO Production.ProductPhoto (LargePhoto)
  VALUES (?)";
                 $uploadPic = $conn->prepare($tsql);
@@ -131,8 +126,8 @@ if (isset($_REQUEST['action'])) {
                     PDO::SQLSRV_ENCODING_BINARY);
                 $uploadPic->execute();
 
-/* Get the first field - the identity from INSERT -
-so we can associate it with the product ID. */
+                /* Get the first field - the identity from INSERT -
+                so we can associate it with the product ID. */
                 $photoID = $conn->lastInsertId();
                 $tsql = "UPDATE Production.ProductProductPhoto
  SET ProductPhotoID = ?
@@ -163,8 +158,7 @@ function GetPicture($productID)
 
 function GetReviews($conn, $productID)
 {
-    try
-    {
+    try {
         $tsql = "SELECT ReviewerName,
 CONVERT(varchar(32),
 ReviewDate, 107) AS [ReviewDate],
@@ -317,7 +311,8 @@ function GetSearchTerms($success)
 {
     /* Get and submit terms for searching the database. */
     if (is_null($success)) {
-        echo "<h4 align='center'>Review successfully submitted.</h4>";}
+        echo "<h4 align='center'>Review successfully submitted.</h4>";
+    }
     echo "<h4 align='center'>Enter search terms to find products.</h4>";
     echo "<table align='center'>
 <form action='adventureworks_demo_pdo.php'
@@ -361,6 +356,7 @@ function PopulateProductsTable($values)
             </td></tr>
             </form></td></tr>";
 }
+
 ?>
 </body>
 </html>

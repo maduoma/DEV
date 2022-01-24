@@ -61,7 +61,7 @@ class DatabaseConnection
 {
     //private $server = "mysql:host=localhost;port=33061;dbname=php_mysql";
     //private $server = "sqlsrv:Server=BNY-L-2101\SQLEXPRESS;Database=PHP_MSSQL";
-    private $server = "mssql:host=BNY-L-2101\SQLEXPRESS;dbname=PHP_MSSQL";
+    private $server = "mssql:host=BNY-L-2101\SQLEXPRESS;dbname=PHPMSSQL";
     private $user = "";
     private $pass = "";
     private $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
